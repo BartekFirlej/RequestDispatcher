@@ -1,0 +1,6 @@
+@Request_Dispatcher_HostAddress = http://localhost:5147
+
+GET {{Request_Dispatcher_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
