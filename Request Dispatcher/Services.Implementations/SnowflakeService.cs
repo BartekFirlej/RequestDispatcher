@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading;
+using Request_Dispatcher.Services.Interfaces;
 
-namespace Request_Dispatcher.Services
+namespace Request_Dispatcher.Services.Imlpementations
 {
     public class SnowflakeService : ISnowflakeService
     {

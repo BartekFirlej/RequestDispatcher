@@ -1,8 +1,9 @@
 ﻿using System.Text;
 using RabbitMQ.Client;
 using Newtonsoft.Json;
+using Request_Dispatcher.Services.Interfaces;
 
-namespace Request_Dispatcher.Services
+namespace Request_Dispatcher.Services.Imlpementations
 {
     public class RabbitMQPublisherService : IRabbitMQPublisherService
     {
