@@ -1,12 +1,33 @@
+using RabbitMQ.Client;
 using Request_Dispatcher.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+ConnectionFactory factory = new ConnectionFactory();
+factory.UserName = "guest";
+factory.Password = "guest";
+factory.HostName = "localhost";
+factory.ClientProvidedName = "app:audit component:event-consumer";
+
+const string FLIGHTS_QUEUE = "Flights";
+const string SIGNALS_QUEUE = "Signals";
+const string TARGETS_QUEUE = "Targets";
+
+IConnection conn = await factory.CreateConnectionAsync();
+IChannel channel = await conn.CreateChannelAsync();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(); 
 builder.Services.AddSingleton<ISnowflakeService>(new SnowflakeService(workerId: 1, datacenterId: 2));
-builder.Services.AddSingleton<IFlightService, FlightService>();
+builder.Services.AddSingleton<IRabbitMQPublisherService>(new RabbitMQPublisherService(channel));
+builder.Services.AddSingleton<IFlightService>(sp =>
+{
+    var snowflakeService = sp.GetRequiredService<ISnowflakeService>();
+    var rabbitMQPublisherService = sp.GetRequiredService<IRabbitMQPublisherService>();
+    var queueName = FLIGHTS_QUEUE;
+    return new FlightService(snowflakeService, rabbitMQPublisherService, queueName);
+});
 
 var app = builder.Build();
 
