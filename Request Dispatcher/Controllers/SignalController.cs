@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Request_Dispatcher.Requests;
-using Request_Dispatcher.Services;
+using Request_Dispatcher.Services.Interfaces;
 
 namespace Request_Dispatcher.Controllers
 {

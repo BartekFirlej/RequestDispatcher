@@ -1,5 +1,6 @@
 using RabbitMQ.Client;
-using Request_Dispatcher.Services;
+using Request_Dispatcher.Services.Imlpementations;
+using Request_Dispatcher.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,12 @@ builder.Services.AddSingleton<ISignalService>(sp =>
 {
     var rabbitMQPublisherService = sp.GetRequiredService<IRabbitMQPublisherService>();
     return new SignalService(rabbitMQPublisherService, SIGNALS_QUEUE);
+});
+builder.Services.AddSingleton<ITargetService>(sp =>
+{
+    var snowflakeService = sp.GetRequiredService<ISnowflakeService>();
+    var rabbitMQPublisherService = sp.GetRequiredService<IRabbitMQPublisherService>();
+    return new TargetService(snowflakeService, rabbitMQPublisherService, TARGETS_QUEUE);
 });
 
 var app = builder.Build();

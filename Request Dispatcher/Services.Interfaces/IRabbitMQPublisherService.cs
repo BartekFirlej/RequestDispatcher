@@ -1,4 +1,4 @@
-﻿namespace Request_Dispatcher.Services
+﻿namespace Request_Dispatcher.Services.Interfaces
 {
     public interface IRabbitMQPublisherService
     {

@@ -1,6 +1,6 @@
 ﻿using Request_Dispatcher.Requests;
 
-namespace Request_Dispatcher.Services
+namespace Request_Dispatcher.Services.Interfaces
 {
     public interface IFlightService
     {
