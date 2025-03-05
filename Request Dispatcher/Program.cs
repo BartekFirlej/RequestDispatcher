@@ -25,8 +25,12 @@ builder.Services.AddSingleton<IFlightService>(sp =>
 {
     var snowflakeService = sp.GetRequiredService<ISnowflakeService>();
     var rabbitMQPublisherService = sp.GetRequiredService<IRabbitMQPublisherService>();
-    var queueName = FLIGHTS_QUEUE;
-    return new FlightService(snowflakeService, rabbitMQPublisherService, queueName);
+    return new FlightService(snowflakeService, rabbitMQPublisherService, FLIGHTS_QUEUE);
+});
+builder.Services.AddSingleton<ISignalService>(sp =>
+{
+    var rabbitMQPublisherService = sp.GetRequiredService<IRabbitMQPublisherService>();
+    return new SignalService(rabbitMQPublisherService, SIGNALS_QUEUE);
 });
 
 var app = builder.Build();

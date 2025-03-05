@@ -6,7 +6,7 @@ using Request_Dispatcher.Services;
 namespace Request_Dispatcher.Controllers
 {
     [ApiController]
-    [Route("flight")]
+    [Route("flights")]
     public class FlighController : ControllerBase
     {
         private readonly IFlightService _flightService;
@@ -17,10 +17,10 @@ namespace Request_Dispatcher.Controllers
         }
 
         [HttpPost]
-        public FlightBeginResponse BeginFlight(FlightBeginRequest flightBeginRequest)
+        public IActionResult BeginFlight(FlightBeginRequest flightBeginRequest)
         {
             var flightId = _flightService.BeginFlight(flightBeginRequest);
-            return new FlightBeginResponse { FlightId = flightId };
+            return CreatedAtAction(nameof(BeginFlight), new FlightBeginResponse { FlightId = flightId });
         }
     }
 }
