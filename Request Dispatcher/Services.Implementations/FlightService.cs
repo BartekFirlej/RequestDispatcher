@@ -18,8 +18,10 @@ namespace Request_Dispatcher.Services.Imlpementations
 
         public long BeginFlight(FlightBeginRequest flightBeginRequest)
         {
+            var flightID = _snowflakeService.NextId();
+            flightBeginRequest.FlightID = flightID;
             _rabbitMQPublisherService.PublishMessage(flightBeginRequest, _queueName);
-            return _snowflakeService.NextId();  
+            return flightID;
         }
     }
 }

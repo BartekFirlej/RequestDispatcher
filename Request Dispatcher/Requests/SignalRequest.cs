@@ -2,7 +2,7 @@
 {
     public class SignalRequest
     {
-        public int FlightId { get; set; }
+        public long FlightId { get; set; }
         public float X { get; set; }
         public float Y { get; set; }
         public float Z { get; set; }
