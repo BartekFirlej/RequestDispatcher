@@ -2,6 +2,6 @@
 {
     public class FlightBeginResponse
     {
-        public long FlightId { get; set; }
+        public string FlightId { get; set; }
     }
 }
