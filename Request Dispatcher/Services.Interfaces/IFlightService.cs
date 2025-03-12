@@ -5,5 +5,6 @@ namespace Request_Dispatcher.Services.Interfaces
     public interface IFlightService
     {
         public long BeginFlight(FlightBeginRequest flightBeginRequest);
+        public long EndFlight(FlightEndRequest flightEndRequest);
     }
 }

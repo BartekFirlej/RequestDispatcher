@@ -31,5 +31,12 @@ namespace Request_Dispatcher.Services.Imlpementations
             _rabbitMQPublisherService.PublishMessage(flightBeginRequest, _TARGETS_FLIGHT_BEGIN_QUEUE);
             return flightID;
         }
+
+        public long EndFlight(FlightEndRequest flightEndRequest)
+        {
+            _rabbitMQPublisherService.PublishMessage(flightEndRequest, _SIGNALS_FLIGHT_END_QUEUE);
+            _rabbitMQPublisherService.PublishMessage(flightEndRequest, _TARGETS_FLIGHT_END_QUEUE);
+            return flightEndRequest.FlightID;
+        }
     }
 }
