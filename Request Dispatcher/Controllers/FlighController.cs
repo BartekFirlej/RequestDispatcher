@@ -16,11 +16,18 @@ namespace Request_Dispatcher.Controllers
             _flightService = flightService;
         }
 
-        [HttpPost]
+        [HttpPost("begin")]
         public IActionResult BeginFlight(FlightBeginRequest flightBeginRequest)
         {
             var flightId = _flightService.BeginFlight(flightBeginRequest);
             return CreatedAtAction(nameof(BeginFlight), new FlightBeginResponse { FlightId = flightId.ToString() });
+        }
+
+        [HttpPost("end")]
+        public IActionResult EndFlight(FlightEndRequest flightEndRequest)
+        {
+            var flightId = _flightService.EndFlight(flightEndRequest);
+            return CreatedAtAction(nameof(BeginFlight), new FlightEndResponse { FlightId = flightId.ToString() });
         }
     }
 }
