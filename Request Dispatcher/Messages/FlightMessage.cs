@@ -1,6 +1,4 @@
-﻿using Request_Dispatcher.Requests;
-
-namespace Request_Dispatcher.Messages
+﻿namespace Request_Dispatcher.Messages
 {
     public class FlightMessage
     {
@@ -13,19 +11,5 @@ namespace Request_Dispatcher.Messages
         public float Z { get; set; }
         public DateTime BeginTime { get; set; }
         public string? Comment { get; set; }
-
-        public FlightMessage(FlightBeginRequest request)
-        {
-            OperatorID = request.OperatorID;
-            TeamID = request.TeamID;
-            FlightID = request.FlightID?.ToString() ?? string.Empty;
-            PlatoonID = request.PlatoonID;
-            X = request.X;
-            Y = request.Y;
-            Z = request.Z;
-            BeginTime = request.BeginTime;
-            Comment = request.Comment;
-        }
     }
-
 }

@@ -7,11 +7,11 @@ namespace Request_Dispatcher.Controllers
 {
     [ApiController]
     [Route("flights")]
-    public class FlighController : ControllerBase
+    public class FlightController : ControllerBase
     {
         private readonly IFlightService _flightService;
 
-        public FlighController(IFlightService flightService)
+        public FlightController(IFlightService flightService)
         {
             _flightService = flightService;
         }

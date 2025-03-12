@@ -1,4 +1,5 @@
-﻿using Request_Dispatcher.Requests;
+﻿using Request_Dispatcher.Messages;
+using Request_Dispatcher.Requests;
 using Request_Dispatcher.Services.Interfaces;
 
 namespace Request_Dispatcher.Services.Imlpementations
@@ -34,9 +35,10 @@ namespace Request_Dispatcher.Services.Imlpementations
 
         public long EndFlight(FlightEndRequest flightEndRequest)
         {
-            _rabbitMQPublisherService.PublishMessage(flightEndRequest, _SIGNALS_FLIGHT_END_QUEUE);
-            _rabbitMQPublisherService.PublishMessage(flightEndRequest, _TARGETS_FLIGHT_END_QUEUE);
-            return flightEndRequest.FlightID;
+            var flightEndMessage = new FlightEndMessage { FlightID = long.Parse(flightEndRequest.FlightID), EndTime = flightEndRequest.EndTime };
+            _rabbitMQPublisherService.PublishMessage(flightEndMessage, _SIGNALS_FLIGHT_END_QUEUE);
+            _rabbitMQPublisherService.PublishMessage(flightEndMessage, _TARGETS_FLIGHT_END_QUEUE);
+            return flightEndMessage.FlightID;
         }
     }
 }
