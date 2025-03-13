@@ -3,6 +3,7 @@
     public class TargetRequest
     {
         public long? ObjectId { get; set; }
+        public long FlightId { get; set; }
         public float X { get; set; }
         public float Y { get; set; }
         public float Z { get; set; }
