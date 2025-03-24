@@ -11,6 +11,6 @@
         public float Z { get; set; }
         public DateTime BeginTime { get; set; }
         public string? Comment { get; set; }
-
+        public string? VideoStream { get; set; }
     }
 }
